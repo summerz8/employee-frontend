@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { Link, Redirect, Route } from "react-router-dom";
+import Button from "./components/UI/Button";
+import EmployeeGrid from "./components/pages/EmployeeGrid";
+import AddEmployee from "./components/pages/AddEmployee";
+import EditEmployee from "./components/pages/EditEmployee";
+import EmployeesProvider from "./store/EmployeesProvider";
+import { useState } from "react";
 
 function App() {
+
+  const [editFormData, setEditFormData] = useState(null);
+  const editDataHandler = (employee) => {
+    console.log(employee);
+    setEditFormData(employee);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <EmployeesProvider>
+      <Route path="/" exact>
+        <Redirect to="/employee/list" />
+      </Route>
+      <Route path="/employee" exact>
+        <Redirect to="/employee/list" />
+      </Route>
+
+      <Route path="/employee/list">
+        <Link to="/employee/add">
+          <Button buttonName="Add Employee" />
+        </Link>
+        <EmployeeGrid onEditData={editDataHandler} />
+      </Route>
+      <Route path="/employee/add">
+        <AddEmployee />
+      </Route>
+
+      <Route path="/employee/edit">
+        <EditEmployee formData={editFormData} />
+      </Route>
+    </EmployeesProvider>
   );
 }
 
