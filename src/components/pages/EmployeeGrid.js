@@ -12,6 +12,12 @@ import {
 
 let isInitial = true;
 
+const defaultColDef = {
+  sortable: true,
+  flex: 1, filter: true,
+  floatingFilter: true
+}
+
 const EmployeeGrid = (props) => {
   const employeesData = useSelector((state) => state.employees);
   const dispatch = useDispatch();
@@ -41,13 +47,14 @@ const EmployeeGrid = (props) => {
 
   return (
     <div>
-      <section>
-        <h1>Employee List</h1>
+      <section >
+      <h1 align="center">Employee List</h1>
       </section>
-      <div className="ag-theme-alpine" style={{ height: 600, width: 1200 }}>
+      <div className="ag-theme-alpine" style={{ height: 600 }}>
         <AgGridReact
           rowData={employeesData}
           pagination={true}
+          defaultColDef={defaultColDef}
           frameworkComponents={{
             actionCellRenderer: BtnCellRenderer,
           }}

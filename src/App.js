@@ -1,5 +1,6 @@
 import { Link, Redirect, Route } from "react-router-dom";
-import Button from "./components/UI/Button";
+import Button from '@mui/material/Button';
+
 import EmployeeGrid from "./components/pages/EmployeeGrid";
 import AddEmployee from "./components/pages/AddEmployee";
 import EditEmployee from "./components/pages/EditEmployee";
@@ -22,10 +23,13 @@ function App() {
 
       <Route path="/employee/list">
         <Link to="/employee/add">
-          <Button buttonName="Add Employee" />
+          <div style={{float: "right"}}>
+          <Button variant="contained" classes={{align: 'right'}}>Add Employee</Button>
+          </div>
         </Link>
         <EmployeeGrid onEditData={editDataHandler} />
       </Route>
+
       <Route path="/employee/add">
         <AddEmployee />
       </Route>

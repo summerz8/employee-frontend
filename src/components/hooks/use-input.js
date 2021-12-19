@@ -16,11 +16,11 @@ const inputStateReducer = (state, action) => {
 const useInput = (defaultValue, validateValue) => {
   const [inputState, dispatch] = useReducer(inputStateReducer, {
     value: defaultValue,
-    isTouched: defaultValue !== "" ,
+    isTouched: false,
   });
 
   const valueIsValid = validateValue(inputState.value);
-  const hasError = !valueIsValid && inputState.isTouched;
+  const hasError = !valueIsValid && (inputState.isTouched || defaultValue !== "" );
 
   const valueChangeHandler = (event) => {
     dispatch({ type: "INPUT", value: event.target.value });

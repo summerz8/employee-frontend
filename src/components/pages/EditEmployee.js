@@ -16,10 +16,15 @@ const EditEmployee = (props) => {
     history.push("/employee/list");
   };
   return (
-    <EmployeeForm
-      initialInputValues={props.formData}
-      onSubmitForm={editUserHandler}
-    />
+    <>
+      <section>
+        <h1 align="center">Edit Employee</h1>
+      </section>
+      <EmployeeForm
+        initialInputValues={props.formData}
+        onSubmitForm={editUserHandler}
+      />
+    </>
   );
 };
 

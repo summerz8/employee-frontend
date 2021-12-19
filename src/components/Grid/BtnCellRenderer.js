@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { DELETE_EMPLOYEE } from "../../store";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const BtnCellRenderer = (props) => {
   const dispatch = useDispatch();
@@ -18,9 +20,23 @@ const BtnCellRenderer = (props) => {
   return (
     <div>
       <Link to="/employee/edit">
-        <button onClick={editHandler.bind(null, props.data)}>Edit</button>
+        <Button
+          onClick={editHandler.bind(null, props.data)}
+          variant="contained"
+          size="small"
+        >
+          Edit
+        </Button>
       </Link>
-      <button onClick={deleteHandler.bind(null, props.data.id)}>Delete</button>
+      <> </>
+      <Button
+        onClick={deleteHandler.bind(null, props.data.id)}
+        variant="outlined"
+        startIcon={<DeleteIcon />}
+        size="small"
+      >
+        Delete
+      </Button>
     </div>
   );
 };

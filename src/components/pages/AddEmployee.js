@@ -10,7 +10,14 @@ const AddEmployee = (props) => {
     dispatch({ type: ADD_EMPLOYEE, employee: employee });
     history.push("/employee/list");
   };
-  return <EmployeeForm onSubmitForm={addUserHandler} />;
+  return (
+    <>
+      <section>
+        <h1 align="center">Add Employee</h1>
+      </section>
+      <EmployeeForm onSubmitForm={addUserHandler} />
+    </>
+  );
 };
 
 export default AddEmployee;

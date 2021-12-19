@@ -1,39 +1,26 @@
 import React from "react";
-import classes from "./SelectField.module.css";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
 
-const SelectField = (props) => {
+const SelectionField = (props) => {
   return (
-    <div>
-      <div
-        className={`${classes.control} ${
-          props.hasError ? classes.invalid : ""
-        }`}
+    <FormControl component="fieldset">
+      <FormLabel component="legend">Gender</FormLabel>
+      <RadioGroup
+        row
+        aria-label="gender"
+        name="row-radio-buttons-group"
+        value={props.value}
+        onChange={props.onChangeHandler}
       >
-        <label htmlFor={props.htmlFor}>{props.name}</label>
-        <input
-          type={props.type}
-          id={props.id}
-          value="female"
-          checked={props.value === "female"}
-          onChange={props.onChangeHandler}
-          onBlur={props.onBlurHandler}
-        />
-        <div className={classes.option}>Female</div>
-        <input
-          type={props.type}
-          id={props.id}
-          value="male"
-          checked={props.value === "male"}
-          onChange={props.onChangeHandler}
-          onBlur={props.onBlurHandler}
-        />
-        <div className={classes.option}>Male</div>
-      </div>
-      <div className={classes["validation-message"]}>
-        {props.hasError && <p>{props.validationMessage}</p>}
-      </div>
-    </div>
+        <FormControlLabel value="female" control={<Radio />} label="Female" />
+        <FormControlLabel value="male" control={<Radio />} label="Male" />
+      </RadioGroup>
+    </FormControl>
   );
 };
 
-export default SelectField;
+export default SelectionField;
