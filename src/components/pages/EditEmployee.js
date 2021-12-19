@@ -1,20 +1,23 @@
-import { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { EDIT_EMPLOYEE } from "../../store";
+
 import EmployeeForm from "../Employees/EmployeeForm";
-import EmployeesContext from "../../store/employees-context";
 
 const EditEmployee = (props) => {
-  const employeesCtx = useContext(EmployeesContext);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const editUserHandler = (employee) => {
-    employeesCtx.editEmployee({...employee, id: props.formData.id});
+    dispatch({
+      type: EDIT_EMPLOYEE,
+      employee: { ...employee, id: props.formData.id },
+    });
     history.push("/employee/list");
   };
   return (
     <EmployeeForm
       initialInputValues={props.formData}
-      actionType="Edit"
       onSubmitForm={editUserHandler}
     />
   );

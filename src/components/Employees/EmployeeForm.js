@@ -17,9 +17,8 @@ const defaultInputValues = {
 
 const isValidName = (value) =>
   value.trim().length >= 6 && value.trim().length <= 10;
-const isValidEmail = (value) => value.includes("@");
-const isValidPhoneNumber = (value) =>
-  value.replace(/[^0-9]/g, "").length === 10 && value.trim().startsWith("65");
+const isValidEmail = (value) => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value.trim());
+const isValidPhoneNumber = (value) => /65(6|8|9)\d{7}/g.test(value.trim());
 const isNotEmpty = (value) => value.trim().length > 0;
 
 const nameValidationMessage =
@@ -121,10 +120,10 @@ const EmployeeForm = (props) => {
     resetGender();
 
     props.onSubmitForm({
-      firstName: firstNameValue,
-      lastName: lastNameValue,
-      email: emailValue,
-      number: phoneNumberValue,
+      firstName: firstNameValue.trim(),
+      lastName: lastNameValue.trim(),
+      email: emailValue.trim(),
+      number: phoneNumberValue.trim(),
       gender: genderValue,
     });
   };
@@ -196,10 +195,8 @@ const EmployeeForm = (props) => {
           <Button
             type="submit"
             disabled={!formIsValid}
-            buttonName={props.actionType}
-          >
-            {props.actionType}
-          </Button>
+            buttonName="Submit"
+          />
         </div>
       </form>
     </Card>

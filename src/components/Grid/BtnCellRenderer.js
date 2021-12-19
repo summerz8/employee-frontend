@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import EmployeesContext from "../../store/employees-context";
+import { useDispatch } from "react-redux";
+import { DELETE_EMPLOYEE } from "../../store";
 
 const BtnCellRenderer = (props) => {
-  const employeesCtx = useContext(EmployeesContext);
-
+  const dispatch = useDispatch();
   const editHandler = (employee) => {
     props.onEditData(employee);
   };
@@ -12,7 +11,7 @@ const BtnCellRenderer = (props) => {
   const deleteHandler = (id) => {
     const confirm = window.confirm("Are you sure to delete this employee?", id);
     if (confirm) {
-      employeesCtx.deleteEmployee(id);
+      dispatch({ type: DELETE_EMPLOYEE, id: id });
     }
   };
 
@@ -21,9 +20,7 @@ const BtnCellRenderer = (props) => {
       <Link to="/employee/edit">
         <button onClick={editHandler.bind(null, props.data)}>Edit</button>
       </Link>
-      <button onClick={deleteHandler.bind(null, props.data.id)}>
-        Delete
-      </button>
+      <button onClick={deleteHandler.bind(null, props.data.id)}>Delete</button>
     </div>
   );
 };

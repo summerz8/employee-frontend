@@ -3,19 +3,16 @@ import Button from "./components/UI/Button";
 import EmployeeGrid from "./components/pages/EmployeeGrid";
 import AddEmployee from "./components/pages/AddEmployee";
 import EditEmployee from "./components/pages/EditEmployee";
-import EmployeesProvider from "./store/EmployeesProvider";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 function App() {
-
   const [editFormData, setEditFormData] = useState(null);
   const editDataHandler = (employee) => {
-    console.log(employee);
     setEditFormData(employee);
   };
 
   return (
-    <EmployeesProvider>
+    <Fragment>
       <Route path="/" exact>
         <Redirect to="/employee/list" />
       </Route>
@@ -36,7 +33,7 @@ function App() {
       <Route path="/employee/edit">
         <EditEmployee formData={editFormData} />
       </Route>
-    </EmployeesProvider>
+    </Fragment>
   );
 }
 

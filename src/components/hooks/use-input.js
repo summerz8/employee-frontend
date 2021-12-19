@@ -16,7 +16,7 @@ const inputStateReducer = (state, action) => {
 const useInput = (defaultValue, validateValue) => {
   const [inputState, dispatch] = useReducer(inputStateReducer, {
     value: defaultValue,
-    isTouched: false,
+    isTouched: defaultValue !== "" ,
   });
 
   const valueIsValid = validateValue(inputState.value);
